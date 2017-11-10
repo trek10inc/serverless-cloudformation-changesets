@@ -1,0 +1,32 @@
+{
+  "author": "Trek10, Inc",
+  "bugs": {
+    "url": "https://github.com/trek10inc/serverless-cloudformation-changesets/issues"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "description": "A serverless plugin for creating CloudFormation ChangeSets",
+  "devDependencies": {
+    "eslint": "^4.10.0"
+  },
+  "engines": {
+    "node": ">=6.0"
+  },
+  "homepage": "https://github.com/trek10inc/serverless-cloudformation-changesets",
+  "keywords": [
+    "serverless",
+    "serverless plugin",
+    "serverless cloudformation changeset",
+    "cloudformation changeset",
+    "aws"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "serverless-cloudformation-changesets",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trek10inc/serverless-cloudformation-changesets"
+  },
+  "version": "0.0.0"
+}
