@@ -8,7 +8,11 @@
   },
   "description": "A serverless plugin for creating CloudFormation ChangeSets",
   "devDependencies": {
-    "eslint": "^4.10.0"
+    "chai": "^4.1.2",
+    "eslint": "^4.10.0",
+    "mocha": "^4.0.1",
+    "serverless": "^1.24.1",
+    "sinon": "^4.1.2"
   },
   "engines": {
     "node": ">=6.0"
@@ -27,6 +31,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/trek10inc/serverless-cloudformation-changesets"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha . ./lib"
   },
   "version": "0.0.0"
 }

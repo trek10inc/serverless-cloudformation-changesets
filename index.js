@@ -16,7 +16,7 @@ class ServerlessCloudFormationChangeSets {
     if (this.options.changeset) {
       this.hooks = {
         'before:aws:deploy:deploy:updateStack': this.lockStackDeployment.bind(this),
-        'aws:deploy:deploy:updateStack': this.createChangeSet.bind(this),
+        'aws:deploy:deploy:updateStack': () => this.createChangeSet.bind(this)(),
         'after:aws:deploy:deploy:updateStack': this.unlockStackDeployment.bind(this)
       }
     }
