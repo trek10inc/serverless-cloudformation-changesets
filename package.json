@@ -35,5 +35,5 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha . ./lib"
   },
-  "version": "0.0.0"
+  "version": "0.0.1"
 }
