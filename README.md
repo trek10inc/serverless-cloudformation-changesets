@@ -29,4 +29,4 @@ $ sls deploy --changeset --stage dev --region us-east-1
 $ sls deploy --changeset your-changeset-name --stage dev --region us-east-1
 ```
 
-If CloudFormation Stack doesn't exist, this plugin will create a new one (without template, resources). The stack will be in the `REVIEW_IN_PROGRESS` state.
+If CloudFormation Stack doesn't exist and custom `provider.deploymentBucket` was specified, this plugin will create a new stack without template, resources. The stack will be in the `REVIEW_IN_PROGRESS` state.

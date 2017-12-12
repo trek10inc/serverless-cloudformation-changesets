@@ -4,15 +4,15 @@
     "url": "https://github.com/trek10inc/serverless-cloudformation-changesets/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "serverless": "^1.24.1"
   },
   "description": "A serverless plugin for creating CloudFormation ChangeSets",
   "devDependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.10.0",
+    "eslint": "^4.13.1",
     "mocha": "^4.0.1",
-    "serverless": "^1.24.1",
-    "sinon": "^4.1.2"
+    "sinon": "^4.1.3"
   },
   "engines": {
     "node": ">=6.0"
