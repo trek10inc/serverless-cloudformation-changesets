@@ -71,6 +71,21 @@ describe('ServerlessCloudFormationChangeSets', () => {
       })
     })
 
+    it('should override changeSetName when calling from CLI', () => {
+      _.set(serverless, 'service.custom.cf-changesets.changeSetName', 'test')
+      const serverlessChangeSets = new ServerlessCloudFormationChangeSets(serverless, {
+        stage: 'dev',
+        region: 'us-east-1',
+        changeset: 'whatever'
+      })
+      expect(serverlessChangeSets.options).to.deep.equal({
+        stage: 'dev',
+        region: 'us-east-1',
+        requireChangeSet: true,
+        changeSetName: 'whatever'
+      })
+    })
+
     it('should set the provider variable to an instance of AwsProvider', () =>
       expect(serverlessChangeSets.provider).to.be.instanceof(AwsProvider))
 

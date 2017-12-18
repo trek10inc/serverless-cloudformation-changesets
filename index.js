@@ -16,7 +16,7 @@ class ServerlessCloudFormationChangeSets {
 
     if (options.changeset) {
       this.options.requireChangeSet = true
-      if (typeof options.changeset === 'string' && !this.options.changeSetName) {
+      if (typeof options.changeset === 'string') {
         this.options.changeSetName = options.changeset
       }
     }
