@@ -1,5 +1,6 @@
 'use strict'
 
+const _ = require('lodash')
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider')
 const createChangeSet = require('./lib/createChangeSet')
 const expect = require('chai').expect
@@ -30,8 +31,44 @@ describe('ServerlessCloudFormationChangeSets', () => {
       expect(serverlessChangeSets.serverless).to.equal(serverless)
     })
 
-    it('should set options', () => {
-      expect(serverlessChangeSets.options).to.equal(options)
+    it('should set options from CLI command', () => {
+      expect(serverlessChangeSets.options).to.deep.equal({
+        stage: 'dev',
+        region: 'us-east-1',
+        requireChangeSet: true,
+        changeSetName: 'test'
+      })
+    })
+
+    it('should set options from YAML config file', () => {
+      _.set(serverless, 'service.custom.cf-changesets.changeSetName', 'test')
+      _.set(serverless, 'service.custom.cf-changesets.requireChangeSet', true)
+      const serverlessChangeSets = new ServerlessCloudFormationChangeSets(serverless, {
+        stage: 'dev',
+        region: 'us-east-1'
+      })
+      expect(serverlessChangeSets.options).to.deep.equal({
+        stage: 'dev',
+        region: 'us-east-1',
+        requireChangeSet: true,
+        changeSetName: 'test'
+      })
+    })
+
+    it('should override requireChangeSet when calling from CLI', () => {
+      _.set(serverless, 'service.custom.cf-changesets.changeSetName', 'test')
+      _.set(serverless, 'service.custom.cf-changesets.requireChangeSet', false)
+      const serverlessChangeSets = new ServerlessCloudFormationChangeSets(serverless, {
+        stage: 'dev',
+        region: 'us-east-1',
+        changeset: true
+      })
+      expect(serverlessChangeSets.options).to.deep.equal({
+        stage: 'dev',
+        region: 'us-east-1',
+        requireChangeSet: true,
+        changeSetName: 'test'
+      })
     })
 
     it('should set the provider variable to an instance of AwsProvider', () =>
@@ -39,7 +76,7 @@ describe('ServerlessCloudFormationChangeSets', () => {
 
     it('should have hooks', () => expect(serverlessChangeSets.hooks).to.be.not.empty)
 
-    it('should have no hooks if changset options is not defined', () => {
+    it('should have no hooks if changset options are not defined', () => {
       const options = {
         stage: 'dev',
         region: 'us-east-1'
@@ -50,14 +87,9 @@ describe('ServerlessCloudFormationChangeSets', () => {
   })
 
   describe('hooks', () => {
-    let setBucketNameStub
-    let createChangeSetStub
-
     beforeEach(() => {
-      setBucketNameStub = sinon
-        .stub(setBucketName, 'setBucketName').resolves()
-      createChangeSetStub = sinon
-        .stub(createChangeSet, 'createChangeSet').resolves()
+      sinon.stub(setBucketName, 'setBucketName').resolves()
+      sinon.stub(createChangeSet, 'createChangeSet').resolves()
     })
 
     afterEach(() => {

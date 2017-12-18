@@ -1,15 +1,27 @@
 'use strict'
 
+const _ = require('lodash')
 const createChangeSet = require('./lib/createChangeSet')
 const setBucketName = require('serverless/lib/plugins/aws/lib/setBucketName')
 
 class ServerlessCloudFormationChangeSets {
   constructor (serverless, options) {
     this.serverless = serverless
-    this.options = options
+    this.options = _.merge(
+      {},
+      _.omit(options, ['changeset']),
+      _.get(serverless.service, 'custom.cf-changesets') || {}
+    )
     this.provider = this.serverless.getProvider('aws')
 
-    if (this.options.changeset) {
+    if (options.changeset) {
+      this.options.requireChangeSet = true
+      if (typeof options.changeset === 'string' && !this.options.changeSetName) {
+        this.options.changeSetName = options.changeset
+      }
+    }
+
+    if (this.options.requireChangeSet) {
       this.hooks = {
         'before:aws:deploy:deploy:updateStack': this.lockStackDeployment.bind(this),
         'aws:deploy:deploy:updateStack': () => Promise.resolve()
