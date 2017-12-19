@@ -129,5 +129,14 @@
     "wrap-iife": [2, "any"],
     "yield-star-spacing": [2, "both"],
     "yoda": [2, "never"],
-  }
+  },
+
+  "overrides": [
+    {
+      "files": "*.test.js",
+      "env": {
+        "mocha": true
+      }
+    }
+  ]
 }
