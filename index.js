@@ -9,10 +9,9 @@ class ServerlessCloudFormationChangeSets {
     this.serverless = serverless
     this.provider = this.serverless.getProvider('aws')
     this.options = _.merge(
-      {
-      },
+      {},
       _.omit(options, ['changeset']),
-      _.get(serverless.service, 'custom.cf-changesets', {}),
+      _.get(serverless.service, 'custom.cf-changesets') || {},
       {
         region: this.provider.getRegion(),
         stage: this.provider.getStage()
