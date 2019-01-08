@@ -7,12 +7,17 @@ const setBucketName = require('serverless/lib/plugins/aws/lib/setBucketName')
 class ServerlessCloudFormationChangeSets {
   constructor (serverless, options) {
     this.serverless = serverless
-    this.options = _.merge(
-      {},
-      _.omit(options, ['changeset']),
-      _.get(serverless.service, 'custom.cf-changesets') || {}
-    )
     this.provider = this.serverless.getProvider('aws')
+    this.options = _.merge(
+      {
+      },
+      _.omit(options, ['changeset']),
+      _.get(serverless.service, 'custom.cf-changesets', {}),
+      {
+        region: this.provider.getRegion(),
+        stage: this.provider.getStage()
+      }
+    )
 
     if (options.changeset) {
       this.options.requireChangeSet = true

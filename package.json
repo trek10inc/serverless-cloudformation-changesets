@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "serverless": "^1.24.1"
+    "serverless": "^1.25.0"
   },
   "description": "A serverless plugin for creating CloudFormation ChangeSets",
   "devDependencies": {
