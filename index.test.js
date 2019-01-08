@@ -31,6 +31,15 @@ describe('ServerlessCloudFormationChangeSets', () => {
       expect(serverlessChangeSets.serverless).to.equal(serverless)
     })
 
+    it('should get options even when no options are passed in', () => {
+      // _.set(serverless, 'service.custom.cf-changesets.changeSetName', 'test')
+      const serverlessChangeSets = new ServerlessCloudFormationChangeSets(serverless, {})
+      expect(serverlessChangeSets.options).to.deep.equal({
+        stage: 'dev',
+        region: 'us-east-1'
+      })
+    })
+
     it('should set options from CLI command', () => {
       expect(serverlessChangeSets.options).to.deep.equal({
         stage: 'dev',
