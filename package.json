@@ -4,8 +4,8 @@
     "url": "https://github.com/trek10inc/serverless-cloudformation-changesets/issues"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
-    "serverless": "^1.24.1"
+    "lodash": "^4.17.11",
+    "serverless": "^1.44.1"
   },
   "description": "A serverless plugin for creating CloudFormation ChangeSets",
   "devDependencies": {
@@ -35,5 +35,5 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha . ./lib"
   },
-  "version": "0.0.2"
+  "version": "0.1.0"
 }
